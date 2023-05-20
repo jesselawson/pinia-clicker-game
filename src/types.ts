@@ -1,23 +1,28 @@
 
 export type Cost = {
-    energy?: number;
-    capacitors?: number;
-    circuits?: number;
+  [key: string]: number;
+} & {
+  energy?: number;
+  capacitors?: number;
+  circuits?: number;
 }
 
 export type BaseCosts = {
-    energy: Cost;
-    capacitors: Cost;
-    circuits: Cost;
+  [key: string]: Cost;
+  energy: Cost;
+  capacitors: Cost;
+  circuits: Cost;
 }
 
 export type GameState = {
-    energy: number,
-    capacitors: number,
-    circuits: number,
-    costMultiplier: number,
-    baseCosts: {
-      capacitors: Cost,
-      circuits: Cost
-    }
-  }
+  [key: string]: number;
+} & {
+  energy: number;
+  capacitors: number;
+  circuits: number;
+  costMultiplier: number;
+  baseCosts: {
+    capacitors: Cost;
+    circuits: Cost;
+  };
+};

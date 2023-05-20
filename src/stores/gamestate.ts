@@ -62,7 +62,7 @@ const generateNextCost = (state: any, resource: string): Cost => {
   }, {});
 };
 
-const canAffordNext = (state: any, resource: string): boolean => {
+const canAffordNext = (state: GameState, resource: string): boolean => {
   const nextCost = generateNextCost(state, resource);
 
   return Object.keys(nextCost).every((costKey) => {
@@ -89,7 +89,7 @@ export const useStore = defineStore({
         "energy": 25,
         "capacitors": 10
       } as Cost
-    } as BaseCosts
+    }
   } as GameState),
   getters: {
     getEnergy(state) {
@@ -104,13 +104,14 @@ export const useStore = defineStore({
     nextResourceCost: (state) => (resource:string) => {
       return generateNextCost(state, resource)
     },
-    nextCapacitorCost(state) {
-      return generateNextCost(state, "capacitors")
-    },
+    canAffordCircuit: (state) => canAffordNext(state, "circuits"),
+    canAffordCapacitor: (state) => canAffordNext(state, "capacitors"),
+    nextCapacitorCost: (state) => generateNextCost(state, "capacitors"),
     nextCircuitCost(state) {
       return generateNextCost(state, "circuits")
-    }
+    },
   },
+  
 
   // Define actions that mutate state values:
   actions: {
@@ -123,21 +124,16 @@ export const useStore = defineStore({
         this.energy += this.energyPerClick
       }
     },
-    canAffordCircuit() {
-      return canAffordNext(this.$state, "circuits")
-    },
-    canAffordCapacitor() {
-      return canAffordNext(this.$state, "capacitors")
-    },
+    
     addCircuit() {
-      if(this.canAffordCircuit()) {
+      if(this.canAffordCircuit) {
         this.energy -= this.nextResourceCost("circuits")?.energy ?? 0
         this.capacitors -= this.nextResourceCost("circuits")?.capacitors ?? 0
         this.circuits++
       }
     },
     addCapacitor() {
-      if(this.canAffordCapacitor()) {
+      if(this.canAffordCapacitor) {
         this.energy -= this.nextResourceCost("capacitors")?.energy ?? 0
         this.capacitors++
       }

@@ -9,7 +9,7 @@ const gameState = useStore();
 
 onMounted( () => {
   setInterval2(()=>{
-    gameState.energy += gameState.energyPerSecond
+    gameState.energy += gameState.energyPerSecond * gameState.circuits
   }, 1000);
 }); 
 
