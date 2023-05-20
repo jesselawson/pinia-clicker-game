@@ -21,26 +21,15 @@ export default {
             store.generateEnergy()
         }
 
-        const generatePassiveEnergy = () => {
-            store.generateEnergy(store.energyPerSecond)
-        }
-
         const energyPerClick = () => {
             return store.energyPerClick
         }
         
         return {
             addEnergy,
-            generatePassiveEnergy,
             energyPerClick
         }
     },
-
-    /*created() {
-        setInterval(() => {
-            this.generatePassiveEnergy()
-        }, 1000)
-    }*/
 }
 </script>
   
