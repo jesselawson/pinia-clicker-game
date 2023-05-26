@@ -1,4 +1,3 @@
-
 export type Cost = {
   [key: string]: number;
 } & {
@@ -10,7 +9,7 @@ export type Cost = {
 export type BaseCosts = {
   [key: string]: Cost;
 } & {
-  energy: Cost;
+  energy?: Cost;
   capacitors: Cost;
   circuits: Cost;
 }
