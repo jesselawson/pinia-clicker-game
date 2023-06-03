@@ -65,7 +65,7 @@ const canAffordNext =
 };
 
 
-export const useStore = defineStore({
+export const gameStateStore = defineStore({
   id: 'gamestate',
 
   // Describe the initial state of our store:
@@ -76,11 +76,11 @@ export const useStore = defineStore({
     costMultiplier: 1.35,
     baseCosts: {
       capacitors: {
-        energy: 10
+        energy: 3
       } as Cost,
       circuits: {
-        energy: 25,
-        capacitors: 10
+        energy: 5,
+        capacitors: 5
       } as Cost
     } as BaseCosts
   } as GameState),
